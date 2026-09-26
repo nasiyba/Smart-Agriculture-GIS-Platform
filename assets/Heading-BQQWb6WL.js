@@ -1,0 +1,1 @@
+import{r as i}from"./common-DOqgIX9j.js";import{e as l}from"./globalCss-Dy68Ws5S.js";import{n as s,v as c}from"./jsxFactory-CDarufM2.js";function h({level:r,class:e,...o},a){const n=t(r);return s(`h${n}`,{...o,"aria-level":String(n),class:c(l.heading,e),role:"heading"},a)}function t(r){return i(Math.ceil(r),1,6)}function p(r,e=1){return t(r+e)}export{p as l,h as s};
