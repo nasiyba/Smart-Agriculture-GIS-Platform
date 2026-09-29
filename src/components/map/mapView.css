@@ -1,0 +1,343 @@
+.agri-map-shell { position:relative; width:100%; height:100%; min-height:460px; overflow:hidden; }
+.agri-map-container { width:100%; height:100%; }
+.agri-map-overlay {
+  position:absolute;
+  right:16px;
+  bottom:16px;
+  width:auto;
+  max-width:220px;
+  background:rgba(247,248,241,.96);
+  border:1px solid rgba(67,78,57,.10);
+  border-radius:14px;
+  box-shadow:0 10px 24px rgba(43,52,34,.14);
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:9px 12px;
+  font-size:11px;
+  color:#747b6d;
+  z-index:3;
+  pointer-events:none;
+}
+.agri-map-overlay--error { color:var(--color-danger); max-width:360px; pointer-events:auto; }
+.agri-map-overlay-detail { font-size:10px; opacity:.78; max-width:320px; text-align:center; }
+.agri-map-spinner { width:16px; height:16px; border-radius:50%; border:2px solid rgba(74,84,63,.15); border-top-color:#dff51f; animation:agri-spin .8s linear infinite; flex:0 0 auto; }
+@keyframes agri-spin { to { transform:rotate(360deg); } }
+.esri-widget, .esri-popup { font-family:var(--font-body) !important; }
+.esri-component, .esri-widget--button {
+  background-color:rgba(246,248,239,.96) !important;
+  backdrop-filter:blur(10px);
+  color:#596052 !important;
+  border-radius:12px !important;
+  box-shadow:0 8px 22px rgba(43,52,34,.13) !important;
+}
+.esri-widget--button:hover { background-color:#eff4c7 !important; }
+.esri-ui-corner .esri-component { margin:7px !important; }
+.esri-popup__main-container { border-radius:18px !important; overflow:hidden; }
+
+
+/* Professional map-tool rail: vertical, left-center, clear of dashboard KPIs. */
+.agri-map-shell .esri-ui-top-left {
+  top: 62% !important;
+  left: 14px !important;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 7px;
+  border-radius: 18px;
+  background: rgba(247, 249, 243, 0.78);
+  border: 1px solid rgba(255,255,255,.72);
+  box-shadow: 0 14px 34px rgba(45,55,38,.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.agri-map-shell .esri-ui-top-left .esri-component {
+  margin: 0 !important;
+}
+.agri-map-shell .esri-ui-top-left .esri-widget--button,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle {
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  border-radius: 12px !important;
+  background: rgba(255,255,255,.96) !important;
+  color: #526049 !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(80,94,70,.08) !important;
+}
+.agri-map-shell .esri-ui-top-left .esri-widget--button:hover,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle:hover,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle[aria-expanded="true"] {
+  background: #e9f5c7 !important;
+  color: #3f5137 !important;
+}
+.agri-map-shell .esri-ui-top-left .esri-expand__container,
+.agri-map-shell .esri-ui-top-left .esri-expand__content {
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+.agri-map-shell .esri-ui-top-left .esri-expand__content {
+  box-shadow: 0 16px 38px rgba(45,55,38,.20) !important;
+}
+@media (max-width: 900px) {
+  .agri-map-shell .esri-ui-top-left {
+    top: auto !important;
+    bottom: 18px !important;
+    left: 14px !important;
+    transform: none;
+    max-height: 54vh;
+  }
+}
+
+
+/* Refined map-tool rail: lower placement, stronger grouping, clearer active state. */
+.agri-map-shell .esri-ui-top-left {
+  padding: 8px !important;
+  gap: 8px !important;
+  background: rgba(247,249,243,.90) !important;
+  border-radius: 20px !important;
+}
+.agri-map-shell .esri-ui-top-left .esri-widget--button,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 13px !important;
+  background: rgba(255,255,255,.98) !important;
+  box-shadow: 0 5px 14px rgba(52,65,44,.08) !important;
+}
+.agri-map-shell .esri-ui-top-left .esri-widget--button:hover,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle:hover,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle[aria-expanded="true"] {
+  background: #5f7253 !important;
+  color: #fff !important;
+}
+
+
+/* Movable map-tool rail ----------------------------------------------------- */
+.agri-map-shell .esri-ui-top-left {
+  --tool-drag-x: 0px;
+  --tool-drag-y: 0px;
+  transform: translateY(-50%) translate(var(--tool-drag-x), var(--tool-drag-y)) !important;
+  user-select: none;
+}
+.agri-map-tool-drag-handle {
+  width: 42px;
+  height: 22px;
+  border-radius: 10px;
+  background: rgba(95,114,83,.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: grab;
+  touch-action: none;
+  box-shadow: 0 5px 14px rgba(52,65,44,.12);
+  border: 1px solid rgba(255,255,255,.62);
+}
+.agri-map-tool-drag-handle.is-dragging { cursor: grabbing; }
+.agri-map-tool-drag-handle span {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.9);
+}
+@media (max-width: 900px) {
+  .agri-map-shell .esri-ui-top-left {
+    transform: translate(var(--tool-drag-x), var(--tool-drag-y)) !important;
+  }
+}
+
+/* Final toolbar placement + orientation switch */
+.agri-map-shell .esri-ui-top-left {
+  top: 70% !important;
+}
+.agri-map-tool-orientation {
+  width: 42px;
+  height: 30px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 10px;
+  background: rgba(255,255,255,.96);
+  color: #53624a;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(52,65,44,.10);
+}
+.agri-map-tool-orientation:hover { background:#e9f5c7; color:#3e5037; }
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal {
+  flex-direction: row !important;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: max-content;
+  max-width: calc(100% - 36px);
+  overflow: visible;
+  transform: translate(var(--tool-drag-x), var(--tool-drag-y)) !important;
+  top: auto !important;
+  bottom: 24px !important;
+}
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal .agri-map-tool-drag-handle {
+  width: 22px;
+  height: 42px;
+  flex-direction: column;
+}
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal .agri-map-tool-orientation {
+  width: 30px;
+  height: 42px;
+}
+
+/* Add-feature editor, matching the reference workflow */
+.agri-feature-editor-overlay {
+  position:absolute;
+  inset:0;
+  z-index:30;
+  display:grid;
+  place-items:center;
+  background:rgba(24,35,25,.38);
+  backdrop-filter:blur(2px);
+}
+.agri-feature-editor-dialog {
+  width:min(390px, calc(100% - 40px));
+  padding:20px;
+  border-radius:18px;
+  background:#fbfcf8;
+  border:1px solid rgba(70,88,61,.14);
+  box-shadow:0 24px 70px rgba(22,31,21,.28);
+  color:#33402f;
+}
+.agri-feature-editor-head {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:16px;
+}
+.agri-feature-editor-head strong { display:block; font-size:18px; color:#31523a; }
+.agri-feature-editor-head span { display:block; margin-top:3px; font-size:10px; color:#8b9587; }
+.agri-feature-editor-head button {
+  border:0; background:transparent; font-size:22px; color:#8d968b; cursor:pointer;
+}
+.agri-editor-field { display:block; margin-top:12px; }
+.agri-editor-field > span { display:block; margin-bottom:6px; font-size:11px; font-weight:750; color:#4b5846; }
+.agri-editor-field input,
+.agri-editor-field select {
+  width:100%;
+  height:42px;
+  border:1px solid #dce4d6;
+  border-radius:10px;
+  padding:0 11px;
+  background:#fff;
+  color:#33402f;
+  font-size:12px;
+  outline:none;
+}
+.agri-editor-field input[readonly] { background:#f2f4ef; color:#727d70; }
+.agri-editor-field select:focus,
+.agri-editor-field input:focus { border-color:#5d8261; box-shadow:0 0 0 3px rgba(93,130,97,.10); }
+.agri-editor-field select.is-invalid { border-color:#cf5b52; box-shadow:0 0 0 3px rgba(207,91,82,.10); }
+.agri-editor-two-col { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.agri-feature-editor-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+.agri-feature-editor-actions button {
+  height:40px; border:1px solid #dce4d6; border-radius:10px; background:#fff; color:#465343; font-size:12px; font-weight:700; cursor:pointer;
+}
+.agri-feature-editor-actions button.primary { background:#2f6b43; color:#fff; border-color:#2f6b43; }
+.agri-feature-editor-actions button.primary:hover { background:#285d3a; }
+
+
+/* Compact toolbar refinement */
+.agri-map-shell .esri-ui-top-left {
+  gap: 5px !important;
+  padding: 6px !important;
+  border-radius: 16px !important;
+}
+.agri-map-shell .esri-ui-top-left .esri-widget--button,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  border-radius: 10px !important;
+}
+.agri-map-tool-drag-handle {
+  width: 34px;
+  height: 18px;
+  border-radius: 8px;
+}
+.agri-map-tool-orientation {
+  width: 34px;
+  height: 26px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal .agri-map-tool-drag-handle {
+  width: 18px;
+  height: 34px;
+}
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal .agri-map-tool-orientation {
+  width: 26px;
+  height: 34px;
+}
+.agri-add-data-action {
+  display:flex !important;
+  align-items:center;
+  gap:9px;
+  width:100%;
+  text-align:left;
+}
+.agri-add-data-icon {
+  width:26px;
+  height:26px;
+  border-radius:8px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#edf4e8;
+  color:#4b6547;
+  flex:0 0 auto;
+}
+.agri-add-data-icon svg { width:16px; height:16px; display:block; }
+
+
+/* Slightly larger map toolbar for easier use */
+.agri-map-shell .esri-ui-top-left { gap: 6px !important; padding: 7px !important; }
+.agri-map-shell .esri-ui-top-left .esri-widget--button,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle {
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  border-radius: 11px !important;
+}
+.agri-map-tool-drag-handle { width: 38px !important; height: 20px !important; }
+.agri-map-tool-orientation { width: 38px !important; height: 28px !important; }
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal .agri-map-tool-drag-handle { width: 20px !important; height: 38px !important; }
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal .agri-map-tool-orientation { width: 28px !important; height: 38px !important; }
+
+
+/* Final toolbar size: slightly larger without becoming bulky */
+.agri-map-shell .esri-ui-top-left { gap: 7px !important; padding: 8px !important; }
+.agri-map-shell .esri-ui-top-left .esri-widget--button,
+.agri-map-shell .esri-ui-top-left .esri-expand__toggle {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 12px !important;
+}
+.agri-map-tool-drag-handle { width: 42px !important; height: 21px !important; }
+.agri-map-tool-orientation { width: 42px !important; height: 30px !important; }
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal .agri-map-tool-drag-handle { width: 21px !important; height: 42px !important; }
+.agri-map-shell .esri-ui-top-left.agri-tools-horizontal .agri-map-tool-orientation { width: 30px !important; height: 42px !important; }
+
+
+/* Pinned toolbar: directly below the dashboard View statistics button. */
+.agri-map-shell .esri-ui-top-left {
+  top: 305px !important;
+  left: 18px !important;
+  bottom: auto !important;
+  transform: none !important;
+  --tool-drag-x: 0px !important;
+  --tool-drag-y: 0px !important;
+}
+.agri-map-tool-drag-handle,
+.agri-map-tool-orientation { display: none !important; }

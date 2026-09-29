@@ -1,0 +1,19 @@
+{
+  "farms": 23,
+  "vegetation_points": 13728,
+  "skipped_null_vegetation_geometry": 5,
+  "layers": {
+    "Agricultural_Field.geojson": 1,
+    "Animal_Pens.geojson": 87,
+    "Buildings_and_Facilities.geojson": 207,
+    "Desalination_Plants.geojson": 0,
+    "Farm_Area.geojson": 23,
+    "Farm_Land_Cover.geojson": 0,
+    "Greenhouses.geojson": 14,
+    "Shade_Houses.geojson": 24,
+    "Solar_Panels.geojson": 10,
+    "Streets.geojson": 105,
+    "Vegetation.geojson": 13733,
+    "Wells.geojson": 0
+  }
+}
