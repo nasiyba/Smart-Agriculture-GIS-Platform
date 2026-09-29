@@ -1,1 +1,0 @@
-import{o}from"./catalogUtils-PAG1U_b2.js";import{G as i,$ as r}from"./layerUtils-DtU1EGJs.js";function t(n){return typeof n=="object"&&n!=null&&"loaded"in n&&n.loaded===!0&&"type"in n}function d(n){return!(!t(n)||!i(n)?.operations?.supportsEditing||"editingEnabled"in n&&!r(n)||o(n))}export{d as e};

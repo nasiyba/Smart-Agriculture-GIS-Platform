@@ -1,0 +1,1 @@
+import{O as i}from"./Loadable-B5eegwvC.js";function d(r,t,n=i){return t||(t=new n),t===r||t.destroyed||(t.removeAll(),a(r)?t.addMany(r):r&&t.add(r)),t}function s(r){return r}function a(r){return r&&(Array.isArray(r)||"items"in r&&Array.isArray(r.items))}export{s as e,d as n};
