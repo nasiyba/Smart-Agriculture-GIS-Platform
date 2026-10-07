@@ -1,0 +1,1 @@
+import{u as e}from"./Color-JeAerOyi.js";const n=new e("cyan"),o=1,r=.25,t=new e("black"),l=.4,w=.2,c=.25,m="default",p="temporary",u=new e("yellow");export{w as a,m as c,n as e,r as l,p as m,t as n,u as p,o as r,l as t,c as w};
