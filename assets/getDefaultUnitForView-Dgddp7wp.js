@@ -1,1 +1,0 @@
-import{_ as i}from"./webMercatorUtils-UTLM_65e.js";import{M as l}from"./Portal-CjqP8B6l.js";function s(r){const t="metric";if(r==null)return t;const e=r.map,n=(e&&"portalItem"in e?e.portalItem?.portal:null)??l.getDefault();switch(n.user?.units??n.units){case t:return t;case"english":return"imperial"}return i(r.spatialReference)??t}export{s as e};

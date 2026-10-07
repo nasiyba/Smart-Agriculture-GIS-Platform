@@ -1,1 +1,0 @@
-import{I as e,Z as o}from"./reactiveUtils-C07qmEYb.js";class t{static{this.instance=new e("Etc/UTC")}}function i(n){return n instanceof o?n===t.instance:n?.toString().toLowerCase()==="unknown"}function a(n){return i(n)?t.instance:n}export{i as e,a as i,t as o};
